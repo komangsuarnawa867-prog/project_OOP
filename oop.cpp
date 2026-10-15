@@ -9,11 +9,8 @@ using namespace std;
 
 class Library;
 
-// ============================================================
 // CLASS BOOK
 // Encapsulation: atribut hanya bisa diakses melalui getter.
-// Library menjadi satu-satunya kelas yang mengubah status buku.
-// ============================================================
 class Book {
 private:
     string id_;
@@ -33,10 +30,8 @@ public:
     bool isAvailable() const { return available_; }
 };
 
-// ============================================================
 // ABSTRACT CLASS MEMBER
 // Abstraction: jenis anggota harus menentukan aturan pinjamnya.
-// ============================================================
 class Member {
 private:
     string id_;
@@ -56,9 +51,7 @@ public:
     virtual int loanDays() const = 0;
 };
 
-// ============================================================
 // INHERITANCE: STUDENT MEMBER
-// ============================================================
 class StudentMember : public Member {
 public:
     StudentMember(const string& id, const string& name)
@@ -69,9 +62,7 @@ public:
     int loanDays() const override { return 7; }
 };
 
-// ============================================================
 // INHERITANCE: LECTURER MEMBER
-// ============================================================
 class LecturerMember : public Member {
 public:
     LecturerMember(const string& id, const string& name)
@@ -82,18 +73,12 @@ public:
     int loanDays() const override { return 14; }
 };
 
-// Satu record untuk setiap transaksi pinjam. Record tetap disimpan
-// setelah buku dikembalikan, sehingga status transaksi tercatat.
 struct Loan {
     string memberId;
     string bookId;
     bool active;
 };
 
-// ============================================================
-// CLASS LIBRARY
-// Mengelola katalog, anggota, pencarian, pinjam, dan kembali.
-// ============================================================
 class Library {
 private:
     vector<Book> books_;
